@@ -1,0 +1,6 @@
+version_orig=4.20.0
+version=$version_orig-1
+apt-get install -y --no-install-recommends curl ca-certificates
+curl -sSLf https://ftp.gnu.org/gnu/libtasn1/libtasn1-$version_orig.tar.gz | gzip -d | tee "$dir/orig.tar" | tar --extract --strip-components 1 --directory "$dir/src"
+apt_src --ignore-orig libtasn1-6
+version_suffix=gl0~bp1592
