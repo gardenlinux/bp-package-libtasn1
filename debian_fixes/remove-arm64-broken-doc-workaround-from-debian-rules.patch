@@ -1,0 +1,22 @@
+--- a/debian/rules	2026-02-11 15:56:21.505047447 +0100
++++ b/debian/rules	2026-02-11 15:56:31.326057943 +0100
+@@ -27,19 +27,6 @@ override_dh_auto_configure:
+ 	--with-packager-bug-reports=https://bugs.debian.org/ \
+ 	--with-packager-version="$(DEB_VERSION)" \
+ 	$(AMCONFBUILDINDEP)
+-	# workaround for #1125243
+-	if [ "$(AMCONFBUILDINDEP)" = "--disable-gtk-doc" ] ; then \
+-		ls -l doc/version.texi doc/stamp-vti doc/libtasn1.info \
+-			doc/libtasn1.texi ; \
+-		if [ "0" = "`stat --format=%Y doc/libtasn1.texi`" ] ; then \
+-			touch --reference=doc/libtasn1.info doc/libtasn1.texi ;\
+-			ls -l doc/version.texi doc/stamp-vti doc/libtasn1.info \
+-				doc/libtasn1.texi ; \
+-		else \
+-			echo workaround not necessary anymore ; \
+-			false ; \
+-		fi ; \
+-	fi
+ 
+ override_dh_autoreconf:
+ 	if ! dh_listpackages | grep -q libtasn1-doc ; \
